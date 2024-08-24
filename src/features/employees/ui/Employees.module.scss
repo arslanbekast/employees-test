@@ -1,0 +1,26 @@
+.employeesList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .employeesItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border: 1px solid #00000020;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+
+    .name {
+      width: 100%;
+      max-width: 525px;
+    }
+    .role {
+      text-align: left;
+      min-width: 100px;
+    }
+  }
+}

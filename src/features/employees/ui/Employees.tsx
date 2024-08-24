@@ -1,0 +1,54 @@
+import s from './Employees.module.scss'
+import { useSelector } from 'react-redux'
+import {
+  selectEmployees,
+  selectFilter,
+  selectRoles,
+  selectSort,
+} from '@/features/employees/model/employees.selectors'
+import { FilterPanel } from '@/features/employees/ui/FilterPanel/FilterPanel'
+import { SortPanel } from '@/features/employees/ui/SortPanel/SortPanel'
+
+export const Employees = () => {
+  const employees = useSelector(selectEmployees)
+  const roles = useSelector(selectRoles)
+  const filter = useSelector(selectFilter)
+  const sort = useSelector(selectSort)
+
+  let modifiedEmployees = employees.filter(
+    emp =>
+      (filter.role ? emp.role === filter.role : true) && (filter.isArchive ? emp.isArchive : true)
+  )
+
+  if (sort) {
+    modifiedEmployees = modifiedEmployees.slice().sort((a, b) => {
+      if (sort === 'birthday') {
+        const dateA = new Date(a[sort].split('.').reverse().join('-')).getTime()
+        const dateB = new Date(b[sort].split('.').reverse().join('-')).getTime()
+        return dateA - dateB
+      }
+
+      if (a[sort] < b[sort]) return -1
+      if (a[sort] > b[sort]) return 1
+      return 0
+    })
+  }
+
+  return (
+    <div className={s.employees}>
+      <FilterPanel />
+      <SortPanel />
+      <ul className={s.employeesList}>
+        {modifiedEmployees.map(employee => {
+          return (
+            <li key={employee.id} className={s.employeesItem}>
+              <span className={s.name}>{employee.name}</span>
+              <span className={s.role}>{roles[employee.role]}</span>
+              <span className={s.phone}>{employee.phone}</span>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+}
