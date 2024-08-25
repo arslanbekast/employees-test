@@ -2,10 +2,7 @@ import { useEffect } from 'react'
 import { useAppDispatch } from '@/common/hooks/useAppDispatch'
 import { setEmployees } from '@/features/employees/model/employeesSlice'
 import s from './App.module.scss'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { EditEmployeePage } from '@/pages/EditEmployeePage/EditEmployeePage'
-import { HomePage } from '@/pages/HomePage/HomePage'
-import { AddEmployeePage } from '@/pages/AddEmployeePage/AddEmployeePage'
+import { Outlet } from 'react-router-dom'
 import { setAppInitialized } from '@/app/appSlice'
 import { useSelector } from 'react-redux'
 import { selectIsInitialized } from '@/app/app.selectors'
@@ -34,25 +31,19 @@ export function App() {
   }
 
   return (
-    <BrowserRouter>
-      <div className={s.app}>
-        <ToastContainer
-          autoClose={5000}
-          closeOnClick
-          draggable
-          hideProgressBar={false}
-          newestOnTop={false}
-          pauseOnFocusLoss
-          pauseOnHover
-          position={'bottom-left'}
-          rtl={false}
-        />
-        <Routes>
-          <Route path={'/'} element={<HomePage />} />
-          <Route path={'/edit/:id'} element={<EditEmployeePage />} />
-          <Route path={'/add/'} element={<AddEmployeePage />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div className={s.app}>
+      <ToastContainer
+        autoClose={5000}
+        closeOnClick
+        draggable
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnFocusLoss
+        pauseOnHover
+        position={'bottom-left'}
+        rtl={false}
+      />
+      <Outlet />
+    </div>
   )
 }
