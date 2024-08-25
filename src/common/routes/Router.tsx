@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { AddEmployeePage } from '@/pages/AddEmployeePage/AddEmployeePage'
 import { EditEmployeePage } from '@/pages/EditEmployeePage/EditEmployeePage'
@@ -9,12 +9,11 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <Navigate to={'/error/'} />,
+    errorElement: <ErrorPage />,
     children: [
       { path: '/', element: <HomePage /> },
       { path: '/add/', element: <AddEmployeePage /> },
       { path: '/edit/:id', element: <EditEmployeePage /> },
-      { path: '/error/', element: <ErrorPage /> },
     ],
   },
 ])
