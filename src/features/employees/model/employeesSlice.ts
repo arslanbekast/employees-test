@@ -22,7 +22,7 @@ const employeesSlice = createSlice({
       state.employees = action.payload
     },
     addEmployee: (state, action: PayloadAction<Employee>) => {
-      state.employees.push(action.payload)
+      state.employees.unshift(action.payload)
     },
     editEmployee: (state, action: PayloadAction<Employee>) => {
       const index = state.employees.findIndex(emp => emp.id === action.payload.id)
@@ -44,11 +44,11 @@ export const { setEmployees, addEmployee, editEmployee, setFilter, setSort } =
   employeesSlice.actions
 
 // types
-type Employee = {
+export type Employee = {
   id: number
   name: string
   isArchive: boolean
-  role: string
+  role: 'cook' | 'waiter' | 'driver'
   phone: string
   birthday: string
 }
@@ -62,7 +62,7 @@ type Roles = {
 }
 export type Sort = 'name' | 'birthday'
 
-type EmployeeState = {
+export type EmployeeState = {
   employees: Employee[]
   roles: Roles
   filter: Filter
