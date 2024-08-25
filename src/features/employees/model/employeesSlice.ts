@@ -48,7 +48,7 @@ export type Employee = {
   id: number
   name: string
   isArchive: boolean
-  role: 'cook' | 'waiter' | 'driver'
+  role: string
   phone: string
   birthday: string
 }
