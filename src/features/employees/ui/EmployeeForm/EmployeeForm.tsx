@@ -17,7 +17,8 @@ type EmployeeFormProps = {
 }
 
 export const EmployeeForm = ({ employee }: EmployeeFormProps) => {
-  const { register, handleSubmit, handleCancel, onSubmit, errors } = useEmployeeForm(employee)
+  const { register, registerWithMask, handleSubmit, handleCancel, onSubmit, errors } =
+    useEmployeeForm(employee)
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -27,19 +28,22 @@ export const EmployeeForm = ({ employee }: EmployeeFormProps) => {
         placeholder={'Имя'}
         error={errors.name?.message}
       />
+
       <TextField
-        {...register('phone')}
-        type="tel"
+        type={'tel'}
+        {...registerWithMask('phone', ['+7 (999) 999-9999'])}
         label={'Телефон:'}
         placeholder={'+7 (999) 999-9999'}
         error={errors.phone?.message}
       />
+
       <TextField
-        {...register('birthday')}
+        {...registerWithMask('birthday', ['99.99.9999'])}
         label={'Дата рождения:'}
         placeholder={'дд.мм.гггг'}
         error={errors.birthday?.message}
       />
+
       <Select {...register('role')} options={selectOptions} label={'Должность:'} />
       <Checkbox {...register('isArchive')} label={'В архиве'} />
       <Button type={'button'} variant={'secondary'} onClick={handleCancel}>

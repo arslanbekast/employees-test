@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { addEmployee, editEmployee, Employee } from '@/features/employees/model/employeesSlice'
 import { z } from 'zod'
 import { toast } from 'react-toastify'
+import { useHookFormMask } from 'use-mask-input'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя не должно быть менее 2 символов'),
@@ -55,6 +56,7 @@ export const useEmployeeForm = (employee?: Employee) => {
     },
     resolver: zodResolver(formSchema),
   })
+  const registerWithMask = useHookFormMask(register)
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -65,7 +67,7 @@ export const useEmployeeForm = (employee?: Employee) => {
   const onSubmit = (data: FormValues) => {
     if (employee) {
       dispatch(editEmployee({ ...employee, ...data }))
-      toast.success(`Отредактирован сотрудник с id - ${employee.id}`)
+      toast.success(`Отредактирован сотрудник ${employee.name}`)
     } else {
       dispatch(addEmployee({ id: Date.now(), ...data }))
       toast.success(`Добавлен сотрудник - ${data.name}`)
@@ -75,6 +77,7 @@ export const useEmployeeForm = (employee?: Employee) => {
 
   return {
     register,
+    registerWithMask,
     handleSubmit,
     handleCancel,
     onSubmit,
