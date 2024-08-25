@@ -1,7 +1,7 @@
 import s from './FilterPanel.module.scss'
 import { useSelector } from 'react-redux'
 import { selectFilter } from '@/features/employees/model/employees.selectors'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { setFilter } from '@/features/employees/model/employeesSlice'
 import { useAppDispatch } from '@/common/hooks/useAppDispatch'
 import { Select } from '@/common/components/Select/Select'
@@ -14,7 +14,7 @@ const selectOptions = [
   { id: 4, value: 'driver', label: 'Водитель' },
 ]
 
-export const FilterPanel = () => {
+export const FilterPanel = memo(() => {
   const filter = useSelector(selectFilter)
   const dispatch = useAppDispatch()
 
@@ -35,4 +35,4 @@ export const FilterPanel = () => {
       </div>
     </div>
   )
-}
+})

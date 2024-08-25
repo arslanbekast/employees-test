@@ -3,8 +3,9 @@ import { useAppDispatch } from '@/common/hooks/useAppDispatch'
 import { setSort, Sort } from '@/features/employees/model/employeesSlice'
 import { useSelector } from 'react-redux'
 import { selectSort } from '@/features/employees/model/employees.selectors'
+import { memo } from 'react'
 
-export const SortPanel = () => {
+export const SortPanel = memo(() => {
   const dispatch = useAppDispatch()
   const sort = useSelector(selectSort)
 
@@ -32,4 +33,4 @@ export const SortPanel = () => {
       </div>
     </div>
   )
-}
+})
