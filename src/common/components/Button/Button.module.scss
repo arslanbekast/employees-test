@@ -1,0 +1,32 @@
+.button {
+  display: inline-block;
+  text-align: center;
+  color: white;
+  padding: 8px 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+
+  &.primary {
+    background-color: #3d5a80;
+  }
+
+  &.secondary {
+    background-color: #2c3845;
+  }
+
+  &:visited {
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+
+  &.fullWidth {
+    width: 100%;
+    max-width: none;
+  }
+}
