@@ -8,6 +8,7 @@ import {
 } from '@/features/employees/model/employees.selectors'
 import { FilterPanel } from '@/features/employees/ui/FilterPanel/FilterPanel'
 import { SortPanel } from '@/features/employees/ui/SortPanel/SortPanel'
+import { Link } from 'react-router-dom'
 
 export const Employees = () => {
   const employees = useSelector(selectEmployees)
@@ -42,9 +43,11 @@ export const Employees = () => {
         {modifiedEmployees.map(employee => {
           return (
             <li key={employee.id} className={s.employeesItem}>
-              <span className={s.name}>{employee.name}</span>
-              <span className={s.role}>{roles[employee.role]}</span>
-              <span className={s.phone}>{employee.phone}</span>
+              <Link to={`/edit/${employee.id}`}>
+                <span className={s.name}>{employee.name}</span>
+                <span className={s.role}>{roles[employee.role]}</span>
+                <span className={s.phone}>{employee.phone}</span>
+              </Link>
             </li>
           )
         })}
