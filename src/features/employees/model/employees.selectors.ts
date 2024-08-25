@@ -4,3 +4,5 @@ export const selectEmployees = (state: RootState) => state.employees.employees
 export const selectRoles = (state: RootState) => state.employees.roles
 export const selectFilter = (state: RootState) => state.employees.filter
 export const selectSort = (state: RootState) => state.employees.sort
+export const selectEmployeeById = (state: RootState, id: string | undefined) =>
+  state.employees.employees.find(employee => employee.id === Number(id))
