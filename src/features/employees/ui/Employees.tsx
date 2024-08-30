@@ -1,8 +1,7 @@
 import s from './Employees.module.scss'
 import { useSelector } from 'react-redux'
 import {
-  selectEmployees,
-  selectFilter,
+  selectEmployeesByFilter,
   selectRoles,
   selectSort,
 } from '@/features/employees/model/employees.selectors'
@@ -11,15 +10,9 @@ import { SortPanel } from '@/features/employees/ui/SortPanel/SortPanel'
 import { Link } from 'react-router-dom'
 
 export const Employees = () => {
-  const employees = useSelector(selectEmployees)
+  let modifiedEmployees = useSelector(selectEmployeesByFilter)
   const roles = useSelector(selectRoles)
-  const filter = useSelector(selectFilter)
   const sort = useSelector(selectSort)
-
-  let modifiedEmployees = employees.filter(
-    emp =>
-      (filter.role ? emp.role === filter.role : true) && (filter.isArchive ? emp.isArchive : true)
-  )
 
   if (sort) {
     modifiedEmployees = modifiedEmployees.slice().sort((a, b) => {
